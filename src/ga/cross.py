@@ -1,33 +1,28 @@
 import numpy as np
-from numba import float32, jit
-from numba.experimental import jitclass
+from numba import jit
 
 
-@jitclass([
-    ('cross_probability', float32),
-])
-class Cross:
-    def __init__(self, cross_probability: float) -> None:
-        self.cross_probability = cross_probability
+@jit(nopython=True)
+def cross_genomes(genome_a: np.ndarray, genome_b: np.ndarray, cross_probability: float) -> np.ndarray:
+    if np.random.random() > cross_probability:
+        return genome_a
+    return _ox(genome_a, genome_b)
 
-    def cross_genome(self, genome_a: np.ndarray, genome_b: np.ndarray) -> np.ndarray:
-        if np.random.random() > self.cross_probability:
-            return genome_a
-        return self._ox(genome_a, genome_b)
 
-    def _ox(self, genome_a: np.ndarray, genome_b: np.ndarray) -> np.ndarray:
-        num_genes = genome_a    .shape[0]
-        copy_start_index, copy_end_index = np.random.choice(num_genes, 2, replace=False)
-        if copy_start_index > copy_end_index:
-            copy_start_index, copy_end_index = copy_end_index, copy_start_index
+@jit(nopython=True)
+def _ox(genome_a: np.ndarray, genome_b: np.ndarray) -> np.ndarray:
+    num_genes = genome_a.shape[0]
+    copy_start_index, copy_end_index = np.random.choice(num_genes, 2, replace=False)
+    if copy_start_index > copy_end_index:
+        copy_start_index, copy_end_index = copy_end_index, copy_start_index
 
-        new_genome = np.copy(genome_a)
-        genome_b_without_copied_cities = remove_values_from_permutation(genome_b, genome_a[copy_start_index:copy_end_index + 1])
+    new_genome = np.copy(genome_a)
+    genome_b_without_copied_cities = remove_values_from_permutation(genome_b, genome_a[copy_start_index:copy_end_index + 1])
 
-        new_genome[:copy_start_index] = genome_b_without_copied_cities[:copy_start_index]
-        new_genome[copy_end_index + 1:] = genome_b_without_copied_cities[copy_start_index:]
+    new_genome[:copy_start_index] = genome_b_without_copied_cities[:copy_start_index]
+    new_genome[copy_end_index + 1:] = genome_b_without_copied_cities[copy_start_index:]
 
-        return new_genome
+    return new_genome
 
 
 @jit

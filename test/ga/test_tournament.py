@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from src.ga.tournament import tournament_selection
+from src.ga.tournament import tournament_selection_round
 
 
 class TestTournament(unittest.TestCase):
@@ -15,7 +15,7 @@ class TestTournament(unittest.TestCase):
             genotypes[individual_index] = np.random.permutation(num_cities)
 
         fitnesses = np.random.randn(population_size)
-        tournament_selection(genomes=genotypes, fitnesses=fitnesses, tournament_size=5)
+        tournament_selection_round(genomes=genotypes, fitnesses=fitnesses, tournament_size=5)
 
     def test_deterministic(self):
         population_size = 100
@@ -26,11 +26,10 @@ class TestTournament(unittest.TestCase):
             genotypes[individual_index] = np.random.permutation(num_cities)
 
         fitnesses = np.random.randn(population_size)
-        fitnesses[0] = 1000000
+        fitnesses[0] = -1000000
 
-        new_genotypes = tournament_selection(genomes=genotypes, fitnesses=fitnesses, tournament_size=population_size)
-        for new_genotype in new_genotypes:
-            np.testing.assert_allclose(new_genotype, genotypes[0])
+        winner = tournament_selection_round(genomes=genotypes, fitnesses=fitnesses, tournament_size=population_size)
+        np.testing.assert_allclose(winner, genotypes[0])
 
 
 if __name__ == '__main__':

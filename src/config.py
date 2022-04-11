@@ -20,7 +20,7 @@ class Config:
 
     @staticmethod
     def _calculate_distance_matrix():
-        return scipy.spatial.distance_matrix(Config.cities.coordinates, Config.cities.coordinates)
+        return scipy.spatial.distance_matrix(Config.cities.coordinates, Config.cities.coordinates).astype(np.float32)
 
     @staticmethod
     def num_cities() -> int:

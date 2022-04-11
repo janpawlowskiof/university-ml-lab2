@@ -3,7 +3,7 @@ import unittest
 
 import numpy as np
 
-from src.ga.cross import Cross, remove_values_from_permutation
+from src.ga.cross import remove_values_from_permutation, cross_genomes
 
 
 class TestCross(unittest.TestCase):
@@ -15,15 +15,14 @@ class TestCross(unittest.TestCase):
 
     def test_create(self):
         num_repeats = 10_000
-        cross = Cross(1.0)
-        new_genotype = cross.cross_genome(self.genome_a, self.genome_b)
+        new_genotype = cross_genomes(self.genome_a, self.genome_b, cross_probability=1.0)
 
         for i in range(self.num_genes):
             self.assertIn(i, new_genotype)
 
         start_time = time.time()
         for _ in range(num_repeats):
-            cross.cross_genome(self.genome_a, self.genome_b)
+            cross_genomes(self.genome_a, self.genome_b, cross_probability=1.0)
         total_time = time.time() - start_time
         print(f"cross took {total_time}")
 
