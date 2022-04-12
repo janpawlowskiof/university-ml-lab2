@@ -15,10 +15,11 @@ class TestCross(unittest.TestCase):
 
     def test_create(self):
         num_repeats = 10_000
-        new_genotype = cross_genomes(self.genome_a, self.genome_b, cross_probability=1.0)
 
-        for i in range(self.num_genes):
-            self.assertIn(i, new_genotype)
+        for _ in range(1000):
+            new_genotype = cross_genomes(self.genome_a, self.genome_b, cross_probability=1.0)
+            for i in range(self.num_genes):
+                self.assertIn(i, new_genotype)
 
         start_time = time.time()
         for _ in range(num_repeats):

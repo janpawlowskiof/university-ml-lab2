@@ -1,5 +1,4 @@
 import numpy as np
-from tqdm import tqdm
 from numba import jit, prange
 
 from src.config import Config
@@ -10,10 +9,9 @@ from src.ga.tournament import tournament_selection_round
 
 
 def run_ga(population_size: int, num_iterations: int, tournament_size: int, cross_probability: float, mutation_probability: float) -> Population:
-    population = Population(population_size, Config.distance_matrix)
+    population = Population(population_size=population_size, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demands)
 
-    pbar = tqdm(range(num_iterations))
-    for iteration in pbar:
+    for iteration in range(num_iterations):
         population.genomes = run_ga_iteration(
             genomes=population.genomes,
             fitnesses=population.fitness,
@@ -22,7 +20,7 @@ def run_ga(population_size: int, num_iterations: int, tournament_size: int, cros
             mutation_probability=mutation_probability
         )
         population.recalculate_fitness()
-        pbar.set_description(f"iteration {iteration}: fitness: {population.get_best_genome_and_fitness()[1]}")
+        print(f"iteration {iteration}: fitness: {population.get_best_genome_and_fitness()[1]}")
     return population
 
 
