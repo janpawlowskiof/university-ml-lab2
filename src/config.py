@@ -7,7 +7,7 @@ import scipy.spatial
 @dataclass
 class Cities:
     coordinates: np.ndarray
-    demands: np.ndarray
+    demand: np.ndarray
 
     def __len__(self):
         return len(self.coordinates)

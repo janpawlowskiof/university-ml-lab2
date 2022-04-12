@@ -3,7 +3,8 @@ import unittest
 
 import numpy as np
 
-from src.ga.cross import remove_values_from_permutation, cross_genomes
+from src.ga.cross.cross import cross_genomes
+from src.ga.cross.ox import remove_values_from_permutation
 
 
 class TestCross(unittest.TestCase):

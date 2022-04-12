@@ -2,14 +2,14 @@ import numpy as np
 from numba import jit, prange
 
 from src.config import Config
-from src.ga.cross import cross_genomes
+from src.ga.cross.cross import cross_genomes
 from src.ga.mutation import mutate
 from src.ga.population import Population
 from src.ga.tournament import tournament_selection_round
 
 
 def run_ga(population_size: int, num_iterations: int, tournament_size: int, cross_probability: float, mutation_probability: float) -> Population:
-    population = Population(population_size=population_size, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demands)
+    population = Population(population_size=population_size, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
 
     for iteration in range(num_iterations):
         population.genomes = run_ga_iteration(
