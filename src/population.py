@@ -2,7 +2,6 @@ from typing import Tuple
 
 import numpy as np
 from numba import int32, float32, prange
-
 from numba.experimental import jitclass
 
 
@@ -43,7 +42,8 @@ class Population:
             carried_cargo -= self.demand[first_city_index]
 
             # going through the route
-            for step_index in range(self.num_cities - 1):
+            num_steps = self.genomes.shape[1] - 1
+            for step_index in range(num_steps):
                 current_city_index = self.genomes[individual_index, step_index]
                 next_city_index = self.genomes[individual_index, step_index + 1]
                 demanded_cargo = self.demand[next_city_index]

@@ -3,7 +3,7 @@ import unittest
 
 from configs import CONFIGS_ROOT
 from src.config import Config
-from src.ga.population import Population
+from src.population import Population
 
 
 class TestPopulation(unittest.TestCase):
