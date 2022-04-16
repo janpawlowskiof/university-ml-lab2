@@ -8,5 +8,6 @@ def mutate(genome: np.ndarray, mutation_probability: float) -> np.ndarray:
     new_genome = np.copy(genome)
     if np.random.random() > mutation_probability:
         index_a, index_b = np.random.choice(num_genes, 2, replace=False)
-        new_genome[index_a], new_genome[index_b] = genome[index_b], genome[index_a]
+        # new_genome[index_a], new_genome[index_b] = new_genome[index_b], new_genome[index_a]
+        new_genome[index_a: index_b] = np.flip(new_genome[index_a: index_b])
     return new_genome

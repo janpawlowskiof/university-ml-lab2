@@ -20,7 +20,8 @@ class Population:
         self.num_cities = len(distance_matrix)
         self.capacity = capacity
         self.distance_matrix = distance_matrix
-        self.demand = demand
+        # self.demand = demand
+        self.demand = np.zeros_like(demand)
         self.genomes = self._get_random_genotypes()
         self.fitness = np.ones(self.population_size, dtype=np.float32)
 

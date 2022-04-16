@@ -18,7 +18,7 @@ def main():
 def check_ga_solution():
     Config.from_path(CONFIGS_ROOT / "tai385.vrp")
     start_time = time.time()
-    population = run_ga(population_size=1000, num_iterations=10000, tournament_size=20, cross_probability=0.8, mutation_probability=0.8)
+    population = run_ga(population_size=1000, num_iterations=10000, tournament_size=5, cross_probability=0.8, mutation_probability=0.8)
     total_time = time.time() - start_time
     print(f"ga took {total_time}")
     best_genome, best_fitness = population.get_best_genome_and_fitness()
