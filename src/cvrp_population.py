@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple, List
 
 import numpy as np
 from numba import int32, float32, prange
@@ -14,14 +14,13 @@ from numba.experimental import jitclass
     ('genomes', int32[:, :]),
     ('fitness', float32[:]),
 ])
-class Population:
+class CVRPPopulation:
     def __init__(self, population_size: int, capacity: int, distance_matrix: np.ndarray, demand: np.ndarray) -> None:
         self.population_size = population_size
         self.num_cities = len(distance_matrix)
         self.capacity = capacity
         self.distance_matrix = distance_matrix
-        # self.demand = demand
-        self.demand = np.zeros_like(demand)
+        self.demand = demand
         self.genomes = self._get_random_genotypes()
         self.fitness = np.ones(self.population_size, dtype=np.float32)
 

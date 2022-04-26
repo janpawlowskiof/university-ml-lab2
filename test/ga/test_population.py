@@ -3,14 +3,14 @@ import unittest
 
 from configs import CONFIGS_ROOT
 from src.config import Config
-from src.population import Population
+from src.cvrp_population import CVRPPopulation
 
 
 class TestPopulation(unittest.TestCase):
     def setUp(self) -> None:
         Config.from_path(CONFIGS_ROOT / "simple.vrp")
         self.population_size = 100
-        self.population = Population(population_size=self.population_size, capacity=30, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
+        self.population = CVRPPopulation(population_size=self.population_size, capacity=30, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
 
     def test_create(self):
         for i in range(self.population_size):
