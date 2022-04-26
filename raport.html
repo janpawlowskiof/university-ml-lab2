@@ -14772,7 +14772,10 @@ jp-needs-light-background
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Testy-wp%C5%82ywu-szansy-mutacji/krzy%C5%BCowania-na-wyniki">Testy wp&#322;ywu szansy mutacji/krzy&#380;owania na wyniki<a class="anchor-link" href="#Testy-wp%C5%82ywu-szansy-mutacji/krzy%C5%BCowania-na-wyniki">&#182;</a></h2><p>Przetestowane zostało kilka par wartości <code>cross_probability</code> oraz <code>mutation_probability</code></p>
 <p>Można zaobserwować, że zwiększanie szansy na mutację oraz krzyżowanie przyśpiesza początkowe zmniejszanie wartości <code>fitness</code> function.
-Zbyt mała wartość <code>cross_probability</code> powoduje wolne mniejszanie się <code>fitnessu</code>. Po wykonaniu <code>3000</code> iteracji najlepsze (nieznacznie) wyniki daje kombinacja stosunkowo małych szans na mutacje oraz krzyżowanie.</p>
+Zbyt mała wartość <code>cross_probability</code> powoduje wolne mniejszanie się <code>fitnessu</code>.
+Po wykonaniu <code>3000</code> iteracji różnica zmniejsza się i najlepsze (nieznacznie) wyniki daje kombinacja stosunkowo małych szans na mutacje oraz krzyżowanie.
+Im większa populacja, tym mniejszą rolę powinna odgrywać mutacja, a ważniejsze jest krzyżowanie.</p>
+<p>Wartości skrajnie duże i małe są oczywiście niepożądane dla krzyżowania. Zbyt duże wartości mutacji również nie są pożądane.</p>
 <p>Ponieważ duże prawdopodobieństwa zwracają wciąż przyzwoite wyniki, ale robią to znacznie szybciej, to dalsze testy używają dużych prawdopodobieństw na mutację oraz krzyżowanie.</p>
 
 </div>
@@ -14936,7 +14939,8 @@ jp-needs-light-background
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Test-rozmiaru-populacji">Test rozmiaru populacji<a class="anchor-link" href="#Test-rozmiaru-populacji">&#182;</a></h2><p>Zwiększanie rozmiaru populacji pomaga poprawić wyniki, większa populacja daje zauważalnie lepsze wyniki, jednak jest to obarczone liniowym przyrostem czasu obliczeń.</p>
+<h2 id="Test-rozmiaru-populacji">Test rozmiaru populacji<a class="anchor-link" href="#Test-rozmiaru-populacji">&#182;</a></h2><p>Zwiększanie rozmiaru populacji pomaga poprawić wyniki, większa populacja daje zauważalnie lepsze wyniki, jednak jest to obarczone liniowym przyrostem czasu obliczeń.
+Zbyt mała populacja da złe wyniki, a zbyt duża będzie się liczyć niepotrzebnie długo.</p>
 
 </div>
 </div>
@@ -15008,6 +15012,20 @@ jp-needs-light-background
 
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Wnioski-odno%C5%9Bnie-liczby-pokole%C5%84">Wnioski odno&#347;nie liczby pokole&#324;<a class="anchor-link" href="#Wnioski-odno%C5%9Bnie-liczby-pokole%C5%84">&#182;</a></h2><p>Liczba pokoleń oczywiście bardzo mocno wpływa na wyniki GA.
+Uczenie z czasem zwalnia i zaczyna zbiegać do pewnej wartości.
+W takiej sytuacji dalsze uczenie nie ma sensu.</p>
+
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
