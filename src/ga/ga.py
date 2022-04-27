@@ -15,8 +15,8 @@ from src.ga.tournament import tournament_selection_round
 nb.config.THREADING_LAYER = 'threadsafe'
 
 
-def run_ga(population_size: int, num_iterations: int, tournament_size: int, cross_probability: float, mutation_probability: float) -> Tuple[CVRPPopulation, pd.DataFrame]:
-    population = CVRPPopulation(population_size=population_size, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
+def run_ga(population_size: int, num_iterations: int, tournament_size: int, cross_probability: float, mutation_probability: float, population_class=CVRPPopulation) -> Tuple[CVRPPopulation, pd.DataFrame]:
+    population: CVRPPopulation = population_class(population_size=population_size, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
     history = []
 
     pbar = tqdm(range(num_iterations))

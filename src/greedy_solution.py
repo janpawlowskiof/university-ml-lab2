@@ -4,8 +4,8 @@ from src.config import Config
 from src.cvrp_population import CVRPPopulation
 
 
-def run_greedy() -> CVRPPopulation:
-    population = CVRPPopulation(population_size=1, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
+def run_greedy(population_class=CVRPPopulation) -> CVRPPopulation:
+    population: CVRPPopulation = population_class(population_size=1, capacity=Config.capacity, distance_matrix=Config.distance_matrix, demand=Config.cities.demand)
     population.genomes = _greedy_get_genome(distance_matrix=Config.distance_matrix, demands=Config.cities.demand, capacity=Config.capacity)[np.newaxis, :]
     population.recalculate_fitness()
 
